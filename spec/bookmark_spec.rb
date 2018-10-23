@@ -4,7 +4,6 @@ require 'database_helpers'
 describe Bookmark do
 
   describe '#all' do
-
     it 'returns bookmarks' do
       expect(Bookmark.all).to be_a(Array)
     end
@@ -23,11 +22,9 @@ describe Bookmark do
       expect(bookmarks.first.title).to eq 'makers'
       expect(bookmarks.first.url).to eq 'http://www.makersacademy.com'
    end
-
   end
 
   describe '#create' do
-
     it 'adds a bookmark' do
       bookmark = Bookmark.create(url: 'http://www.testurl.com', title: 'test title')
       persisted_data = persisted_data(bookmark.id)
@@ -37,13 +34,35 @@ describe Bookmark do
       expect(bookmark.title).to eq 'test title'
       expect(bookmark.url).to eq 'http://www.testurl.com'
     end
-
   end
+
   describe '#delete' do
     it 'deletes a bookmark' do
       bookmark = Bookmark.create(url: 'http://www.testurl.com', title: 'test title')
       Bookmark.delete(id: bookmark.id)
       expect(Bookmark.all.length).to eq 0
+    end
+  end
+
+  describe '#update' do
+    it 'updates a bookmark' do
+      bookmark = Bookmark.create(url: 'http://www.testurl.com', title: 'test title')
+      updated_bookmark = Bookmark.update(id: bookmark.id, url: 'http://diffurl.com', title: 'diff title')
+      expect(updated_bookmark.title).to eq 'diff title'
+      expect(updated_bookmark.url).to eq 'http://diffurl.com'
+    end
+  end
+
+  describe '.find' do
+    it 'returns the requested bookmark object' do
+      bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+
+      result = Bookmark.find(id: bookmark.id)
+
+      expect(result).to be_a Bookmark
+      expect(result.id).to eq bookmark.id
+      expect(result.title).to eq 'Makers Academy'
+      expect(result.url).to eq 'http://www.makersacademy.com'
     end
   end
 
