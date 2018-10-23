@@ -1,4 +1,5 @@
 require 'bookmark'
+require 'database_helpers'
 
 describe Bookmark do
 
@@ -11,25 +12,30 @@ describe Bookmark do
     it 'contains urls' do
       connection = PG.connect(dbname: 'bookmark_manager_test')
 
-      connection.exec("INSERT INTO bookmarks (url, title) VALUES ('http://www.makersacademy.com', 'makers');")
-      connection.exec("INSERT INTO bookmarks (url, title) VALUES('http://www.destroyallsoftware.com', 'destroy all software');")
-      connection.exec("INSERT INTO bookmarks (url, title) VALUES('http://www.google.com', 'google');")
-
+      bookmark = Bookmark.create(url: "http://www.makersacademy.com", title: "makers")
+      Bookmark.create(url: "http://www.destroyallsoftware.com", title: "destroy all software")
+      Bookmark.create(url: "http://www.google.com", title: "google")
       bookmarks = Bookmark.all
 
-      expect(bookmarks).to include({url: 'http://www.makersacademy.com' , title: 'makers'})
-      expect(bookmarks).to include({url: 'http://www.destroyallsoftware.com' , title: 'destroy all software'})
-      expect(bookmarks).to include({url: 'http://www.google.com' ,title: 'google'})
-      end
+      expect(bookmarks.length).to eq 3
+      expect(bookmarks.first).to be_a Bookmark
+      expect(bookmarks.first.id).to eq bookmark.id
+      expect(bookmarks.first.title).to eq 'makers'
+      expect(bookmarks.first.url).to eq 'http://www.makersacademy.com'
+   end
 
   end
 
   describe '#create' do
 
     it 'adds a bookmark' do
-      Bookmark.create('http://testurl.com', 'test title')
-      bookmarks = Bookmark.all
-      expect(bookmarks).to include({url: "http://testurl.com" , title: "test title"})
+      bookmark = Bookmark.create(url: 'http://www.testurl.com', title: 'test title')
+      persisted_data = persisted_data(bookmark.id)
+
+      expect(bookmark).to be_a Bookmark
+      expect(bookmark.id).to eq persisted_data.first['id']
+      expect(bookmark.title).to eq 'test title'
+      expect(bookmark.url).to eq 'http://www.testurl.com'
     end
 
   end

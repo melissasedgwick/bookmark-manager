@@ -5,6 +5,6 @@ feature 'Adding bookmarks' do
     fill_in :bookmark, with: 'http://www.facebook.com'
     fill_in :title, with: 'facebook'
     click_button('Submit')
-    expect(page).to have_content "facebook"
+    expect(page).to have_link('facebook', href: 'http://www.facebook.com')
   end
 end

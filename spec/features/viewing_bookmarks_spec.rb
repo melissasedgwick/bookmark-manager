@@ -13,14 +13,14 @@ feature 'Viewing bookmarks' do
   end
 
   scenario 'shows bookmarks on webpage' do
-    Bookmark.create("http://www.makersacademy.com", "makers")
-    Bookmark.create("http://www.destroyallsoftware.com", "destroy all software")
-    Bookmark.create("http://www.google.com", "google")
+    Bookmark.create(url: "http://www.makersacademy.com", title: "makers")
+    Bookmark.create(url: "http://www.destroyallsoftware.com", title: "destroy all software")
+    Bookmark.create(url: "http://www.google.com", title: "google")
     visit('/bookmarks')
 
-    expect(page).to have_content "makers"
-    expect(page).to have_content "destroy all software"
-    expect(page).to have_content "google"
+    expect(page).to have_link('makers', href: 'http://www.makersacademy.com')
+    expect(page).to have_link('destroy all software',  href: 'http://www.destroyallsoftware.com')
+    expect(page).to have_link('google', href: 'http://www.google.com')
   end
 
 end
