@@ -22,6 +22,10 @@ I want to be able to update existing URLs
 As a user
 So I can easily locate bookmarks
 I want to be able to see titles for the URLs
+
+As a user
+So I can only save real URLs
+I want to have my URLs validated before submitting
 ```
 
 ## How to Use ##
