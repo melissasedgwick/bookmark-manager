@@ -58,7 +58,7 @@ describe Bookmark do
     end
   end
 
-  describe '.find' do
+  describe '#find' do
     it 'returns the requested bookmark object' do
       bookmark = Bookmark.create(title: 'Makers', url: 'http://www.makersacademy.com')
 
@@ -68,6 +68,15 @@ describe Bookmark do
       expect(result.id).to eq bookmark.id
       expect(result.title).to eq 'Makers'
       expect(result.url).to eq 'http://www.makersacademy.com'
+    end
+  end
+
+  describe '#comments' do
+    it 'returns a list of comments on bookmark' do
+      bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      DatabaseConnection.query("INSERT INTO comments (id, text, bookmark_id) VALUES(1, 'This is a comment', #{bookmark.id})")
+      comment = bookmark.comments.first
+      expect(comment['text']).to eq 'This is a comment'
     end
   end
 
