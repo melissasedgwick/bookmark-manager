@@ -3,8 +3,8 @@ feature 'Adding bookmarks' do
     visit('/')
     click_button('View Bookmarks')
     fill_in :url, with: 'http://www.facebook.com'
-    fill_in :title, with: 'facebook'
+    fill_in :title, with: 'Facebook'
     click_button('Submit')
-    expect(page).to have_link('facebook', href: 'http://www.facebook.com')
+    expect(page).to have_link('Facebook', href: 'http://www.facebook.com')
   end
 end
