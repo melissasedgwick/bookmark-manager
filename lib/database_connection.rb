@@ -10,4 +10,8 @@ class DatabaseConnection
     @connection
   end
 
+  def self.query(command)
+    @connection.exec(command)
+  end
+
 end
