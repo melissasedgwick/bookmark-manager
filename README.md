@@ -8,8 +8,20 @@ So I can quickly reach the websites I like
 I want to be able to see a list of bookmarks
 
 As a user
-So that I can easily access a website
+So I can easily access a website
 I want to be able to add a URL to my bookmarks
+
+As a user
+So I can remove unwanted links
+I want to be able to delete a URL from my bookmarks
+
+As a user
+So I can change my bookmarks
+I want to be able to update existing URLs
+
+As a user
+So I can easily locate bookmarks
+I want to be able to see titles for the URLs
 ```
 
 ## How to Use ##
