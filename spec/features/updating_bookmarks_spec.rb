@@ -6,7 +6,7 @@ feature 'Updating bookmarks' do
 
     first('.bookmark').click_button 'Update'
 
-    fill_in('bookmark', with: "http://www.snakersacademy.com")
+    fill_in('url', with: "http://www.snakersacademy.com")
     fill_in('title', with: "Snakers Academy")
     click_button('Submit')
 
