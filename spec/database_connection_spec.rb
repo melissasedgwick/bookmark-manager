@@ -8,6 +8,8 @@ describe DatabaseConnection do
       DatabaseConnection.setup('bookmark_manager_test')
     end
 
+  end
+
   describe '#query' do
     it 'executes a query via PG' do
       connection = DatabaseConnection.setup('bookmark_manager_test')
