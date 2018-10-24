@@ -3,6 +3,8 @@ require 'database_helpers'
 
 describe Bookmark do
 
+  let(:comment) { double :comment }
+
   describe '#all' do
     it 'returns bookmarks' do
       expect(Bookmark.all).to be_a(Array)
@@ -27,7 +29,7 @@ describe Bookmark do
   describe '#create' do
     it 'adds a bookmark' do
       bookmark = Bookmark.create(url: 'http://www.testurl.com', title: 'Test Title')
-      persisted_data = persisted_data(bookmark.id)
+      persisted_data = persisted_data(id: bookmark.id, table: 'bookmarks')
 
       expect(bookmark).to be_a Bookmark
       expect(bookmark.id).to eq persisted_data.first['id']
@@ -72,11 +74,10 @@ describe Bookmark do
   end
 
   describe '#comments' do
-    it 'returns a list of comments on bookmark' do
+    it 'calls .where on the Comment class' do
       bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
-      DatabaseConnection.query("INSERT INTO comments (id, text, bookmark_id) VALUES(1, 'This is a comment', #{bookmark.id})")
-      comment = bookmark.comments.first
-      expect(comment['text']).to eq 'This is a comment'
+      expect(comment).to receive(:where).with(bookmark_id: bookmark.id)
+      bookmark.comments(comment)
     end
   end
 
