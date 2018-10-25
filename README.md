@@ -26,6 +26,14 @@ I want to be able to see titles for the URLs
 As a user
 So I can only save real URLs
 I want to have my URLs validated before submitting
+
+As a user
+So I can add useful information to tags
+I want to be able to add comments to bookmarks
+
+As a user
+So that I can categorise my bookmarks
+I want to be able to add tags to my bookmarks
 ```
 
 ## How to Use ##
@@ -54,6 +62,8 @@ Connect to `psql` and create the `bookmark_manager` and `bookmark_manager_test` 
 CREATE DATABASE bookmark_manager;
 CREATE DATABASE bookmark_manager_test;
 ```
+
+For both databases, follow the db/migrations/ files to setup the necessary tables. 
 
 ## Testing ##
 
