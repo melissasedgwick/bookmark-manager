@@ -4,6 +4,7 @@ require 'database_helpers'
 describe Bookmark do
 
   let(:comment) { double :comment }
+  let(:tag) { double :tag }
 
   describe '#all' do
     it 'returns bookmarks' do
@@ -78,6 +79,14 @@ describe Bookmark do
       bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
       expect(comment).to receive(:where).with(bookmark_id: bookmark.id)
       bookmark.comments(comment)
+    end
+  end
+
+  describe '#find_tags' do
+    it 'calls #where on the Tag class' do
+      bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      expect(tag).to receive(:where).with(bookmark_id: bookmark.id)
+      bookmark.find_tags(tag)
     end
   end
 

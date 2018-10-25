@@ -1,6 +1,7 @@
 require_relative 'database_connection'
 require 'uri'
 require_relative 'comment'
+require_relative 'tag'
 
 class Bookmark
 
@@ -41,6 +42,10 @@ class Bookmark
 
   def comments(comment_class = Comment)
     comment_class.where(bookmark_id: id)
+  end
+
+  def find_tags(tag = Tag.new)
+    tag.where(bookmark_id: id)
   end
 
   private
