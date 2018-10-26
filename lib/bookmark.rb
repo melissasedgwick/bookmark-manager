@@ -44,7 +44,7 @@ class Bookmark
     comment_class.where(bookmark_id: id)
   end
 
-  def find_tags(tag = Tag.new)
+  def find_tags(tag = Tag)
     tag.where(bookmark_id: id)
   end
 
